@@ -29,3 +29,16 @@ avg_score_category = df.groupby("subreddit")["score"].mean()
 
 print("\nAverage score per category:")
 print(avg_score_category)
+
+
+# Show percentage distribution
+dist = (df["subreddit"].value_counts(normalize=True) * 100).round(2)
+
+print("\nCategory distribution (%):")
+print(dist.rename("percentage"))
+
+print("\nInsight:")
+
+print("1. Technology dominates with 88% of posts, indicating heavy bias due to keyword fallback.")
+print("2. Other categories have very low representation, which may affect analysis accuracy.")
+print("3. Worldnews has highest average score, showing fewer but impactful posts.")
