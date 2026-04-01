@@ -1,3 +1,4 @@
+
 import requests
 import json
 import os
@@ -22,16 +23,20 @@ def get_category(title):
                 return category
     return "technology"  # fallback
 # Fetch IDs
+# Fetch top 500 story IDs from HackerNews
 response = requests.get(TOP_STORIES_URL, headers=headers)
 story_ids = response.json()[:500]
 collected_posts = []
+# Loop through each story and fetch details
 for story_id in story_ids:
     try:
         res = requests.get(ITEM_URL.format(story_id), headers=headers)
         story = res.json()
         if story is None or "title" not in story:
             continue
+            # Assign category based on title keywords
         category = get_category(story["title"])
+# Store required fields in dictionary
         post = {
             "post_id": story.get("id"),
             "title": story.get("title"),
