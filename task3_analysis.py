@@ -39,6 +39,9 @@ print(dist.rename("percentage"))
 
 print("\nInsight:")
 
-print("1. Technology dominates with 88% of posts, indicating heavy bias due to keyword fallback.")
-print("2. Other categories have very low representation, which may affect analysis accuracy.")
-print("3. Worldnews has highest average score, showing fewer but impactful posts.")
+top_category = df["subreddit"].value_counts(normalize=True).idxmax()
+top_percentage = (df["subreddit"].value_counts(normalize=True).max() * 100).round(2)
+
+print(f"1. {top_category} dominates with {top_percentage}% of posts, indicating dataset bias.")
+print("2. Other categories have low representation, affecting reliability.")
+print("3. Some smaller categories show higher average scores, indicating impactful posts.")
